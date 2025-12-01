@@ -30,16 +30,30 @@ int main() {
         int distance = instructions[i].distance;
 
         if (direction == 'L') {
+            int stepsToZero = (currentPosition == 0) ? 100 : currentPosition;
+            if (distance >= stepsToZero) {
+                zeroCount += 1 + (distance - stepsToZero) / 100;
+            }
             currentPosition = (currentPosition - distance) % 100;
-            if (currentPosition < 0) currentPosition += 100;
+            if (currentPosition < 0)
+            {
+                currentPosition += 100;
+            }
+
         } else if (direction == 'R') {
+            int stepsToZero = (currentPosition == 0) ? 100 : (100 - currentPosition);
+            if (distance >= stepsToZero) {
+                zeroCount += 1 + (distance - stepsToZero) / 100;
+            }
             currentPosition = (currentPosition + distance) % 100;
+            if (currentPosition < 0)
+            {
+                currentPosition += 100;
+            }
         }
-        if (currentPosition == 0) {
-            zeroCount++;
-        }
+
         std::cout << "Current Position: " << currentPosition << std::endl;
     }
-    std::cout << "zero Count is: " << zeroCount << std::endl;
+    std::cout << "zero Count: " << zeroCount << std::endl;
     return 0;
 }
